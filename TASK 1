@@ -1,29 +1,35 @@
-import random
+#include <iostream>
+#include <cstdlib>  // For rand() and srand() functions
+#include <ctime>    // For time() function
 
-def guess_the_number():
-    # Generate a random number between 1 and 100
-    secret_number = random.randint(1, 100)
+int main() {
+    // Seed the random number generator with the current time
+    std::srand(static_cast<unsigned int>(std::time(nullptr)));
 
-    # Initialize the user's guess to an invalid value
-    user_guess = None
+    // Generate a random number between 1 and 100
+    int secretNumber = std::rand() % 100 + 1;
 
-    # Keep asking the user to guess until they get it right
-    while user_guess != secret_number:
-        try:
-            # Get the user's guess as an integer
-            user_guess = int(input("Guess the number (between 1 and 100): "))
+    int userGuess;
+    int attempts = 0;
 
-            # Provide feedback on the user's guess
-            if user_guess < secret_number:
-                print("Too low! Try again.")
-            elif user_guess > secret_number:
-                print("Too high! Try again.")
-            else:
-                print(f"Congratulations! You guessed the correct number, {secret_number}!")
-        except ValueError:
-            # Handle the case where the user enters a non-integer value
-            print("Invalid input. Please enter a valid number.")
+    std::cout << "Welcome to the Number Guessing Game!\n";
+    std::cout << "Try to guess the secret number between 1 and 100.\n";
 
-# Call the function to start the game
-guess_the_number()
+    do {
+        std::cout << "Enter your guess: ";
+        std::cin >> userGuess;
 
+        attempts++;
+
+        if (userGuess == secretNumber) {
+            std::cout << "Congratulations! You guessed the correct number in " << attempts << " attempts.\n";
+        } else if (userGuess < secretNumber) {
+            std::cout << "Too low! Try again.\n";
+        } else {
+            std::cout << "Too high! Try again.\n";
+        }
+
+    } while (userGuess != secretNumber);
+
+    return 0;
+}
