@@ -1,41 +1,45 @@
-def add(x, y):
-    return x + y
+#include <iostream>
 
-def subtract(x, y):
-    return x - y
+int main() {
+    double num1, num2, result;
+    char operation;
 
-def multiply(x, y):
-    return x * y
+  
+    std::cout << "Enter first number: ";
+    std::cin >> num1;
 
-def divide(x, y):
-    if y != 0:
-        return x / y
-    else:
-        return "Cannot divide by zero"
+    std::cout << "Enter second number: ";
+    std::cin >> num2;
 
-# Get user input for numbers and operation
-try:
-    num1 = float(input("Enter the first number: "))
-    num2 = float(input("Enter the second number: "))
-    operation = input("Choose operation (+ for addition, - for subtraction, * for multiplication, / for division): ")
+    std::cout << "Choose operation (+, -, *, /): ";
+    std::cin >> operation;
 
-    # Perform the selected operation
-    if operation == "+":
-        result = add(num1, num2)
-    elif operation == "-":
-        result = subtract(num1, num2)
-    elif operation == "*":
-        result = multiply(num1, num2)
-    elif operation == "/":
-        result = divide(num1, num2)
-    else:
-        result = "Invalid operation"
+   
+    switch (operation) {
+        case '+':
+            result = num1 + num2;
+            std::cout << "Result: " << result << std::endl;
+            break;
+        case '-':
+            result = num1 - num2;
+            std::cout << "Result: " << result << std::endl;
+            break;
+        case '*':
+            result = num1 * num2;
+            std::cout << "Result: " << result << std::endl;
+            break;
+        case '/':
+            if (num2 != 0) {
+                result = num1 / num2;
+                std::cout << "Result: " << result << std::endl;
+            } else {
+                std::cout << "Error: Division by zero is not allowed." << std::endl;
+            }
+            break;
+        default:
+            std::cout << "Error: Invalid operation." << std::endl;
+            break;
+    }
 
-    # Display the result
-    print(f"Result: {result}")
-
-except ValueError:
-    print("Invalid input. Please enter valid numbers.")
-
-except Exception as e:
-    print(f"An error occurred: {e}")
+    return 0;
+}
